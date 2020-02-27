@@ -15,6 +15,9 @@ player_a_y = player_b_y = height/2
 player_a_img = pygame.image.load("player_a.png")
 player_b_img = pygame.image.load("player_b.png")
 
+player_a_img = pygame.transform.scale(player_a_img,(10,10))
+player_b_img = pygame.transform.scale(player_b_img,(10,10))
+
 player_a_speed = [1,0]
 player_b_speed = [-1,0]
 
