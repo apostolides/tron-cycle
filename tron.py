@@ -3,7 +3,7 @@ import sys
 import time
 
 pygame.init()
-pygame.display.set_caption("Tron")
+pygame.display.set_caption("Tron Version 1.0")
 
 '''
 icon = pygame.image.load("icon.png")
@@ -14,16 +14,16 @@ frame_resolution = width, height = 800, 600
 
 screen = pygame.display.set_mode(frame_resolution)
 
+
 # ---- Player images initialization ---- #
 player_a_img = pygame.image.load("player_a.png")
 player_b_img = pygame.image.load("player_b.png")
-
 
 player_a_img = pygame.transform.scale(player_a_img,(10,10))
 player_b_img = pygame.transform.scale(player_b_img,(10,10))
 
 crushed = pygame.image.load("crushed.png")
-crushed = pygame.transform.scale(crushed,(10,10))
+crushed = pygame.transform.scale(crushed,(11,11))
 
 player_a_rect = player_a_img.get_rect().move(100,height/2)
 player_b_rect = player_b_img.get_rect().move(width-100,height/2)
@@ -40,6 +40,40 @@ player_b_area = []
 
 player_a_area.append((player_a_rect.x,player_a_rect.y))
 player_b_area.append((player_b_rect.x,player_b_rect.y))
+
+# ---- Display main menu ---- #
+menu_img = pygame.image.load("tron.jpg")
+menu_img = pygame.transform.scale(menu_img,(width,height))
+
+logo_img = pygame.image.load("logo.png")
+logo_img = pygame.transform.scale(logo_img,(600,200))
+
+screen.blit(menu_img,(0,0))
+screen.blit(logo_img,(70,30))
+
+pygame.display.update()
+
+on_menu = True
+while on_menu:
+    for event in pygame.event.get():
+        if event.type == pygame.KEYDOWN:
+            on_menu = False
+        elif event.type == pygame.QUIT:
+            sys.exit()
+
+# ---- Generate grid --- #
+grid_color = (7,184,163)
+bg_color = (0,44,48)
+screen.fill(bg_color)
+
+for row in range(0,height,10):
+    pygame.draw.line(screen,grid_color,(0,row),(width,row))
+
+for col in range(0,width,10):
+    pygame.draw.line(screen,grid_color,(col,0),(col,height))
+
+pygame.draw.line(screen,grid_color,(0,height-1),(width,height-1))
+pygame.draw.line(screen,grid_color,(width-1,0),(width-1,height))
 
 # ---- Main game loop ---- #
 while True:
@@ -127,5 +161,5 @@ pygame.display.update()
 # ---- Press any key to continue ---- #
 while True:
     for event in pygame.event.get():
-        if event.type == pygame.KEYDOWN:
+        if event.type == pygame.KEYDOWN or event.type == pygame.QUIT:
             sys.exit()
