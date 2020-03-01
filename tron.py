@@ -177,4 +177,5 @@ while True:
             elif event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_ESCAPE:
                     sys.exit()
-                on_restart = False
+                elif event.key == pygame.K_RETURN:
+                    on_restart = False
